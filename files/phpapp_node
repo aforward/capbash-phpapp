@@ -1,0 +1,4 @@
+#!/bin/bash
+./submodules/deploykeys/install
+./submodules/nginx/install
+./submodules/phpapp/install

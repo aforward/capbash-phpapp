@@ -1,0 +1,6 @@
+#!/bin/bash
+./capbash install deploykeys
+./capbash install nginx
+
+cp ./submodules/phpapp/files/phpapp_node ./nodes/phpapp
+chmod 755 ./nodes/phpapp
