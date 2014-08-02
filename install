@@ -8,6 +8,7 @@ PHPAPP_GIT_URL=${PHPAPP_GIT_URL-git@github.com:aforward/samplephp.git}
 PHPAPP_NAME=${PHPAPP_NAME-samplephp}
 PHPAPP_SERVER_NAME=${PHPAPP_SERVER_NAME-samplephp.vm}
 PHPAPP_PUBLIC_PATH=${PHPAPP_PUBLIC_PATH-/public}
+PHPAPP_LOGS=${PHPAPP_LOGS-/var/log/nginx}
 
 #-----------
 # Install Script
@@ -22,6 +23,7 @@ fi
 cp ./submodules/phpapp/files/nginx_conf /etc/nginx/sites-enabled/${PHPAPP_NAME}
 sed -i "s|@SERVER_NAME@|$PHPAPP_SERVER_NAME|g" /etc/nginx/sites-enabled/${PHPAPP_NAME}
 sed -i "s|@SERVER_ROOT@|/var/apps/${PHPAPP_NAME}${PHPAPP_PUBLIC_PATH}|g" /etc/nginx/sites-enabled/${PHPAPP_NAME}
+sed -i "s|@SERVER_LOGS@|$PHPAPP_LOGS|g" /etc/nginx/sites-enabled/${PHPAPP_NAME}
 
 
 

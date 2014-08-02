@@ -4,6 +4,9 @@ server {
   root @SERVER_ROOT@;
   index index.php index.html index.htm;
 
+  access_log @SERVER_LOGS@/@SERVER_NAME@_nginx.access.log;
+  error_log @SERVER_LOGS@/@SERVER_NAME@_nginx.error.log;
+
   location / {
     try_files $uri $uri/ /index.php?q=$uri&$args;
   }
@@ -11,10 +14,9 @@ server {
   error_page 404 /404.html;
   error_page 500 502 503 504 /50x.html;
   location = /50x.html {
-    root @DRUPAL_ROOT@;
+    root @SERVER_ROOT@;
   }
 
-  # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9$
   location ~ \.php$ {
     try_files $uri =404;
     fastcgi_pass unix:/var/run/php5-fpm.sock;
