@@ -25,7 +25,7 @@ Now you can install phpapp into your project
 The available configurations include:
 
 ```
-PHPAPP_GIT_URL=${PHPAPP_GIT_URL-git@github.com:aforward/samplephp.git}
+GIT_URL=${GIT_URL-git@github.com:aforward/samplephp.git}
 PHPAPP_NAME=${PHPAPP_NAME-samplephp}
 PHPAPP_SERVER_NAME=${PHPAPP_SERVER_NAME-samplephp.vm}
 PHPAPP_PUBLIC_PATH=${PHPAPP_PUBLIC_PATH-/public}

@@ -4,7 +4,7 @@
 # Configurations
 #-----------
 
-PHPAPP_GIT_URL=${PHPAPP_GIT_URL-git@github.com:aforward/samplephp.git}
+GIT_URL=${GIT_URL-git@github.com:aforward/samplephp.git}
 PHPAPP_NAME=${PHPAPP_NAME-samplephp}
 PHPAPP_SERVER_NAME=${PHPAPP_SERVER_NAME-samplephp.vm}
 PHPAPP_PUBLIC_PATH=${PHPAPP_PUBLIC_PATH-/public}
@@ -14,11 +14,7 @@ PHPAPP_LOGS=${PHPAPP_LOGS-/var/log/nginx}
 # Install Script
 #-----------
 
-if [[ ! -e /var/apps/${PHPAPP_NAME} ]]; then
-  (cd /var/apps && git clone ${PHPAPP_GIT_URL} ${PHPAPP_NAME})
-else
-  (cd /var/apps/${PHPAPP_NAME} && git checkout master && git fetch && git reset --hard origin/master)
-fi
+GIT_URL=$GIT_URL GIT_REPO_NAME=$PHPAPP_NAME ./submodules/git/install
 
 cp ./submodules/phpapp/files/nginx_conf /etc/nginx/sites-enabled/${PHPAPP_NAME}
 sed -i "s|@SERVER_NAME@|$PHPAPP_SERVER_NAME|g" /etc/nginx/sites-enabled/${PHPAPP_NAME}
