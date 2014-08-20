@@ -7,8 +7,9 @@
 PHPAPP_NAME=${PHPAPP_NAME-samplephp}
 PHPAPP_SERVER_NAME=${PHPAPP_SERVER_NAME-samplephp.vm}
 PHPAPP_PUBLIC_PATH=${PHPAPP_PUBLIC_PATH-/public}
-PHPAPP_LOGS=${PHPAPP_LOGS-/var/log/nginx}
 PHPAPP_MODE=${PHPAPP_MODE-git}
+PHPAPP_SERVER=${PHPAPP_SERVER-nginx}
+PHPAPP_LOGS=${PHPAPP_LOGS-/var/log/$PHPAPP_SERVER}
 
 GIT_URL=${GIT_URL-git@github.com:aforward/samplephp.git}
 TARBALL_FILENAME=${TARBALL_FILENAME-./assets/myapp.tar.gz}
@@ -22,13 +23,15 @@ if [[ "$PHPAPP_MODE" == "git" ]]; then
 
 elif [[ "$PHPAPP_MODE" == "zip" ]]; then
   TARBALL_NAME=$PHPAPP_NAME TARBALL_MODE=zip TARBALL_FILENAME=$TARBALL_FILENAME ./submodules/tarball/install
-
 fi
 
-cp ./submodules/phpapp/files/nginx_conf /etc/nginx/sites-enabled/${PHPAPP_NAME}
-sed -i "s|@SERVER_NAME@|$PHPAPP_SERVER_NAME|g" /etc/nginx/sites-enabled/${PHPAPP_NAME}
-sed -i "s|@SERVER_ROOT@|/var/apps/${PHPAPP_NAME}${PHPAPP_PUBLIC_PATH}|g" /etc/nginx/sites-enabled/${PHPAPP_NAME}
-sed -i "s|@SERVER_LOGS@|$PHPAPP_LOGS|g" /etc/nginx/sites-enabled/${PHPAPP_NAME}
+if [[ "$PHPAPP_SERVER" == "nginx" ]]; then
+  CONF_FILENAME=/etc/$PHPAPP_SERVER/sites-enabled/${PHPAPP_NAME}
+elif [[ "$PHPAPP_SERVER" == "apache2" ]]; then
+  CONF_FILENAME=/etc/$PHPAPP_SERVER/sites-enabled/${PHPAPP_NAME}.conf
+fi
 
-
-
+cp ./submodules/phpapp/files/${PHPAPP_SERVER}_conf $CONF_FILENAME
+sed -i "s|@SERVER_NAME@|$PHPAPP_SERVER_NAME|g" $CONF_FILENAME
+sed -i "s|@SERVER_ROOT@|/var/apps/${PHPAPP_NAME}${PHPAPP_PUBLIC_PATH}|g" $CONF_FILENAME
+sed -i "s|@SERVER_LOGS@|$PHPAPP_LOGS|g" $CONF_FILENAME

@@ -1,0 +1,15 @@
+<VirtualHost *:80>
+  ServerAdmin admin@@SERVER_NAME@
+  ServerName @SERVER_NAME@
+  DocumentRoot @SERVER_ROOT@
+
+  <Directory @SERVER_ROOT@>
+      Options Indexes FollowSymLinks MultiViews
+      AllowOverride All
+      Require all granted
+  </Directory>
+
+  ErrorLog @SERVER_LOGS@/@SERVER_NAME@.error.log
+  CustomLog @SERVER_LOGS@/@SERVER_NAME@.access.log combined
+
+</VirtualHost>
