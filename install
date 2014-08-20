@@ -4,17 +4,26 @@
 # Configurations
 #-----------
 
-GIT_URL=${GIT_URL-git@github.com:aforward/samplephp.git}
 PHPAPP_NAME=${PHPAPP_NAME-samplephp}
 PHPAPP_SERVER_NAME=${PHPAPP_SERVER_NAME-samplephp.vm}
 PHPAPP_PUBLIC_PATH=${PHPAPP_PUBLIC_PATH-/public}
 PHPAPP_LOGS=${PHPAPP_LOGS-/var/log/nginx}
+PHPAPP_MODE=${PHPAPP_MODE-git}
+
+GIT_URL=${GIT_URL-git@github.com:aforward/samplephp.git}
+TARBALL_FILENAME=${TARBALL_FILENAME-./assets/myapp.tar.gz}
 
 #-----------
 # Install Script
 #-----------
 
-GIT_URL=$GIT_URL GIT_REPO_NAME=$PHPAPP_NAME ./submodules/git/install
+if [[ "$PHPAPP_MODE" == "git" ]]; then
+  GIT_URL=$GIT_URL GIT_REPO_NAME=$PHPAPP_NAME ./submodules/git/install
+
+elif [[ "$PHPAPP_MODE" == "zip" ]]; then
+  TARBALL_NAME=$PHPAPP_NAME TARBALL_MODE=zip TARBALL_FILENAME=$TARBALL_FILENAME ./submodules/tarball/install
+
+fi
 
 cp ./submodules/phpapp/files/nginx_conf /etc/nginx/sites-enabled/${PHPAPP_NAME}
 sed -i "s|@SERVER_NAME@|$PHPAPP_SERVER_NAME|g" /etc/nginx/sites-enabled/${PHPAPP_NAME}
