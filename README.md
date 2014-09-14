@@ -25,10 +25,15 @@ Now you can install phpapp into your project
 The available configurations include:
 
 ```
-GIT_URL=${GIT_URL-git@github.com:aforward/samplephp.git}
 PHPAPP_NAME=${PHPAPP_NAME-samplephp}
 PHPAPP_SERVER_NAME=${PHPAPP_SERVER_NAME-samplephp.vm}
 PHPAPP_PUBLIC_PATH=${PHPAPP_PUBLIC_PATH-/public}
+PHPAPP_MODE=${PHPAPP_MODE-git}
+PHPAPP_SERVER=${PHPAPP_SERVER-nginx}
+PHPAPP_LOGS=${PHPAPP_LOGS-/var/log/$PHPAPP_SERVER}
+
+GIT_URL=${GIT_URL-git@github.com:aforward/samplephp.git}
+TARBALL_FILENAME=${TARBALL_FILENAME-./assets/myapp.tar.gz}
 ```
 
 # Deploy to Remote Server #

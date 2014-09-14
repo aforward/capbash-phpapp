@@ -4,8 +4,8 @@ server {
   root @SERVER_ROOT@;
   index index.php index.html index.htm;
 
-  access_log @SERVER_LOGS@/@SERVER_NAME@_nginx.access.log;
-  error_log @SERVER_LOGS@/@SERVER_NAME@_nginx.error.log;
+  access_log @SERVER_LOGS@/@APP_NAME@_nginx.access.log;
+  error_log @SERVER_LOGS@/@APP_NAME@_nginx.error.log;
 
   location / {
     try_files $uri $uri/ /index.php?q=$uri&$args;

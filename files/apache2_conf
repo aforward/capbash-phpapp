@@ -9,7 +9,7 @@
       Require all granted
   </Directory>
 
-  ErrorLog @SERVER_LOGS@/@SERVER_NAME@.error.log
-  CustomLog @SERVER_LOGS@/@SERVER_NAME@.access.log combined
+  ErrorLog @SERVER_LOGS@/@APP_NAME@.error.log
+  CustomLog @SERVER_LOGS@/@APP_NAME@.access.log combined
 
 </VirtualHost>

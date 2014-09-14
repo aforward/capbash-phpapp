@@ -32,6 +32,7 @@ elif [[ "$PHPAPP_SERVER" == "apache2" ]]; then
 fi
 
 cp ./submodules/phpapp/files/${PHPAPP_SERVER}_conf $CONF_FILENAME
+sed -i "s|@APP_NAME@|$PHPAPP_NAME|g" $CONF_FILENAME
 sed -i "s|@SERVER_NAME@|$PHPAPP_SERVER_NAME|g" $CONF_FILENAME
 sed -i "s|@SERVER_ROOT@|/data/${PHPAPP_NAME}${PHPAPP_PUBLIC_PATH}|g" $CONF_FILENAME
 sed -i "s|@SERVER_LOGS@|$PHPAPP_LOGS|g" $CONF_FILENAME
