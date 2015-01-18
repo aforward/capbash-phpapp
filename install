@@ -28,6 +28,10 @@ if [[ "$PHPAPP_MODE" == "git" ]]; then
 elif [[ "$PHPAPP_MODE" == "zip" ]]; then
   debug "  -- Installing via zip"
   TARBALL_NAME=$PHPAPP_NAME TARBALL_MODE=zip TARBALL_FILENAME=$TARBALL_FILENAME ./submodules/tarball/install
+
+elif [[ "$PHPAPP_MODE" == "targz" ]]; then
+  TARBALL_NAME=$PHPAPP_NAME TARBALL_MODE=targz TARBALL_FILENAME=$TARBALL_FILENAME ./submodules/tarball/install
+
 fi
 
 if [[ "$PHPAPP_SERVER" == "nginx" ]]; then
